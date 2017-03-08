@@ -19,4 +19,5 @@ public interface RestApi {
     @POST("account/login")
     Observable<ResponseWrapper<String>> login(@Body LoginParam loginParam);
 
+
 }

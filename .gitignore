@@ -6,4 +6,9 @@
 .DS_Store
 /build
 /captures
+/node_modules
+ .buckconfig
+.flowconfig
+.idea/
+package.json
 .externalNativeBuild
