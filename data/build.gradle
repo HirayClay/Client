@@ -1,0 +1,57 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.neenbedankt.android-apt'
+
+
+android {
+    def DB_VERSION = "1"
+
+    compileSdkVersion parent.ext.compileSdkVersion
+    buildToolsVersion parent.ext.buildToolsVersion
+    defaultConfig {
+        minSdkVersion parent.ext.minSdkVersion
+        targetSdkVersion parent.ext.targetSdkVersion
+        versionCode parent.ext.versionCode
+        versionName parent.ext.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        //ormlite db config
+        buildConfigField "String", "DB_NAME", "\"jiqu.db\""
+        buildConfigField "int", "DB_VERSION", "1"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+        }
+
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+        }
+    }
+
+
+}
+
+dependencies {
+    compile rootProject.ext.dependencies.androidSupportV7
+    compile rootProject.ext.dependencies.dagger
+    apt rootProject.ext.dependencies.daggerCompiler
+    provided rootProject.ext.dependencies.javaxAnnotation
+    compile rootProject.ext.dependencies.rxJava
+    compile rootProject.ext.dependencies.rxAndroid
+    compile rootProject.ext.dependencies.ormlite
+    compile rootProject.ext.dependencies.retrofit
+    compile rootProject.ext.dependencies.retrofitGsonConverter
+    compile rootProject.ext.dependencies.retrofitRxJavaAdapter
+    compile project(':domain')
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    testCompile 'junit:junit:4.12'
+}

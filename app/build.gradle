@@ -1,0 +1,61 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+android {
+    compileSdkVersion parent.ext.compileSdkVersion
+    buildToolsVersion parent.ext.buildToolsVersion
+    defaultConfig {
+        applicationId "com.jiqu.client"
+        minSdkVersion parent.ext.minSdkVersion
+        targetSdkVersion parent.ext.targetSdkVersion
+        versionCode parent.ext.versionCode
+        versionName parent.ext.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+
+    signingConfigs{
+        debug {
+            storeFile file("./keystore/jiqu.jks")
+            keyPassword "jiqu123"
+            storePassword "jiqu123"
+            keyAlias "jiquKey"
+        }
+
+        release{
+            storeFile file("./keystore/jiqu.jks")
+            keyPassword "jiqu123"
+            storePassword "jiqu123"
+            keyAlias "jiquKey"
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile rootProject.ext.dependencies.androidSupportV7
+    compile rootProject.ext.dependencies.androidSupportDesign
+    compile rootProject.ext.dependencies.butterKnife
+    compile rootProject.ext.dependencies.dagger
+    apt rootProject.ext.dependencies.daggerCompiler
+    provided rootProject.ext.dependencies.javaxAnnotation
+    compile rootProject.ext.dependencies.androidSupportDesign
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    compile project(':data')
+    compile project(':domain')
+    compile project(':common')
+    // optional
+    compile 'com.android.support:support-v4:23.4.0'
+    compile 'com.flipboard:bottomsheet-core:1.5.0'
+    compile 'com.flipboard:bottomsheet-commons:1.5.0'
+    compile 'com.android.support.constraint:constraint-layout:1.0.1'
+    testCompile 'junit:junit:4.12'
+}
