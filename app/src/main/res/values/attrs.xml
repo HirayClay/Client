@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MaterialCircleView">
+
+        <attr name="bGradient" format="boolean"/>
+        <attr name="circleColor" format="color"/>
+        <attr name="circleWidth" format="dimension"/>
+        <attr name="radius" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="UniversalLoadingView">
+
+        <attr name="bg_transparent" format="boolean"/>
+        <attr name="bg_alpha" format="integer"/>
+
+    </declare-styleable>
+</resources>

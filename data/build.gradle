@@ -18,6 +18,11 @@ android {
         buildConfigField "String", "DB_NAME", "\"jiqu.db\""
         buildConfigField "int", "DB_VERSION", "1"
 
+        //thread pool config
+        buildConfigField "int", "CORE_POOL_SIZE", "5"
+        buildConfigField "int", "MAXIMUM_POOL_SIZE", "5"
+        buildConfigField "int", "KEEP_ALIEVE_TIME", "10"
+
     }
     buildTypes {
         release {

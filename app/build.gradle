@@ -19,7 +19,7 @@ android {
     }
 
 
-    signingConfigs{
+    signingConfigs {
         debug {
             storeFile file("./keystore/jiqu.jks")
             keyPassword "jiqu123"
@@ -27,7 +27,7 @@ android {
             keyAlias "jiquKey"
         }
 
-        release{
+        release {
             storeFile file("./keystore/jiqu.jks")
             keyPassword "jiqu123"
             storePassword "jiqu123"
