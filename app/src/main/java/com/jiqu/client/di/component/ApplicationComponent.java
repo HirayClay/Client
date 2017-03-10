@@ -27,8 +27,9 @@ public interface ApplicationComponent {
     @Named("official")
     AccountRepo accountRepo();
 
+    //mock if for test environment
     @Named("mock")
-    AccountRepo otherAccountRepo();
+    AccountRepo mockAccountRepo();
 
 
 }

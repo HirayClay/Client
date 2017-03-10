@@ -17,6 +17,7 @@ import rx.schedulers.Schedulers;
 
 /**
  * Created by CJJ on 2017/3/6.
+ *
  */
 @ActivityScope
 public class LoginPresenter extends PresenterAdapter {

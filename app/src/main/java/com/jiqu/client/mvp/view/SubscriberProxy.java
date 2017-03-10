@@ -24,14 +24,15 @@ public class SubscriberProxy implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        Log.i(TAG, "invoke: "+method);
-        if (method.getName().startsWith("on"))
-        {
+        Object res = null;
+        Log.i(TAG, "invoke: " + method);
+        if (method.getName().startsWith("on")) {
             Log.i(TAG, "invoke:-----------------reflection onComplete ");
-            subscriber.enableView();
+            subscriber.disableView();
         }
         if (method != null)
-        return method.invoke(subscriber,args);
-        else return null;
+            res = method.invoke(subscriber, args);
+        subscriber.enableView();
+        return res;
     }
 }

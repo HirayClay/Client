@@ -28,4 +28,10 @@ public abstract class WrapperSubscriber<T> extends Subscriber<T> {
         if (throttleView != null)
             throttleView.setEnabled(true);
     }
+
+    public void disableView()
+    {
+        if (throttleView != null)
+            throttleView.setEnabled(false);
+    }
 }
