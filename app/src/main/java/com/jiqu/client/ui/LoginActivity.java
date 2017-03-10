@@ -2,6 +2,7 @@ package com.jiqu.client.ui;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.jiqu.client.R;
@@ -22,6 +23,8 @@ public class LoginActivity extends BaseActivity implements LoginView {
     LoginPresenter loginPresenter;
     @Bind(R.id.msg)
     TextView msgText;
+    @Bind(R.id.login_button)
+    Button loginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,5 +50,15 @@ public class LoginActivity extends BaseActivity implements LoginView {
     public void onLogin(String message) {
 
         msgText.setText(message);
+    }
+
+    @Override
+    public void enable() {
+        loginButton.setEnabled(true);
+    }
+
+    @Override
+    public void disable() {
+        loginButton.setEnabled(false);
     }
 }

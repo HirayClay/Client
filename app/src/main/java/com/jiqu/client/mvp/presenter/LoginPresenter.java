@@ -37,10 +37,11 @@ public class LoginPresenter extends PresenterAdapter {
 
     @SuppressWarnings("unchecked")
     public void login(String userName, String password, @Nullable String captcha) {
+        loginView.disable();
         accountRepo.login(new LoginParam(userName, password, captcha))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(createSubscriberProxy(new WrapperSubscriber<String>() {
+                .subscribe(createSubscriberProxy(new WrapperSubscriber<String>(loginView) {
                     @Override
                     public void onCompleted() {
                         Log.i(TAG, "onCompleted:  It is Complete");

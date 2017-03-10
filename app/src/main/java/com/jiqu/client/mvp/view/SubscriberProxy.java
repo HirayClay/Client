@@ -28,11 +28,9 @@ public class SubscriberProxy implements InvocationHandler {
         Log.i(TAG, "invoke: " + method);
         if (method.getName().startsWith("on")) {
             Log.i(TAG, "invoke:-----------------reflection onComplete ");
-            subscriber.disableView();
+            subscriber.enable();
         }
-        if (method != null)
-            res = method.invoke(subscriber, args);
-        subscriber.enableView();
-        return res;
+
+        return method.invoke(subscriber, args);
     }
 }

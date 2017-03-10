@@ -1,7 +1,5 @@
 package com.jiqu.client.mvp.view;
 
-import android.view.View;
-
 import rx.Subscriber;
 
 /**
@@ -13,25 +11,22 @@ import rx.Subscriber;
 
 public abstract class WrapperSubscriber<T> extends Subscriber<T> {
 
-    private Subscriber<T> subscriber;
-    private View throttleView;
+    private ReactView reactView;
 
     public WrapperSubscriber() {
     }
 
-    public WrapperSubscriber(View throttleView, Subscriber<T> subscriber) {
-        this.subscriber = subscriber;
-        this.throttleView = throttleView;
+    public WrapperSubscriber(ReactView reactView) {
+        this.reactView = reactView;
     }
 
-    public void enableView() {
-        if (throttleView != null)
-            throttleView.setEnabled(true);
+    public void disable() {
+        if (reactView != null)
+            reactView.disable();
     }
 
-    public void disableView()
-    {
-        if (throttleView != null)
-            throttleView.setEnabled(false);
+    public void enable() {
+        if (reactView != null)
+            reactView.enable();
     }
 }

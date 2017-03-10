@@ -5,7 +5,7 @@ package com.jiqu.client.mvp.view;
  *
  */
 
-public interface  AuthLoadView{
+public interface  AuthLoadView extends ReactView{
 
     void onAuthFail();
     void showLoading();

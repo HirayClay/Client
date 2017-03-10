@@ -75,4 +75,14 @@ public class BaseActivity extends AppCompatActivity implements AuthLoadView {
     protected void retrieve() {
 
     }
+
+    @Override
+    public void enable() {
+        //empty
+    }
+
+    @Override
+    public void disable() {
+
+    }
 }

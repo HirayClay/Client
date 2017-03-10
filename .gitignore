@@ -1,9 +1,9 @@
 *.iml
+*jks
 .gradle
 /local.properties
 /.idea/workspace.xml
 /.idea/libraries
-/app/keystore/*
 .DS_Store
 /build
 /captures
@@ -13,3 +13,4 @@
 .idea/
 package.json
 .externalNativeBuild
+data/src/main/java/com/jiqu/data/repository/datasource/

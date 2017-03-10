@@ -7,4 +7,6 @@ package com.jiqu.client.mvp.view;
 
 public interface ReactView {
 
+    void enable();
+    void disable();
 }
