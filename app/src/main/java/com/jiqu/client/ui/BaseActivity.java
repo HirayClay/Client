@@ -4,12 +4,15 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.jiqu.client.di.component.ApplicationComponent;
+import com.jiqu.client.mvp.view.AuthLoadView;
+
 /**
  * Created by CJJ on 2017/3/7.
  *
  */
 
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends AppCompatActivity implements AuthLoadView {
 
     DialogProgressFragment progressFragment;
 
@@ -23,27 +26,48 @@ public class BaseActivity extends AppCompatActivity {
 
     }
 
+
+    ApplicationComponent applicationComponent() {
+        return ((BaseApplication) getApplicationContext()).getApplicationComponent();
+    }
+
     public boolean defaultLoading() {
         return true;
     }
 
-    protected void showLoading() {
+    @Override
+    public void onAuthFail() {
+        if (/*使用loginDialogFragment 登录*/false) {
+
+        }
+    }
+
+    public void showLoading() {
 
 //        StackTraceElement[] stackTrace = new Throwable().getStackTrace();
-        if (progressFragment == null)
-        {
-            progressFragment= DialogProgressFragment.show(this);
-        }else {
+        if (progressFragment == null) {
+            progressFragment = DialogProgressFragment.show(this);
+        } else {
             progressFragment.dismissAllowingStateLoss();
             progressFragment.show(this);
         }
 
     }
 
-    protected void hideLoading(){
+    public void hideLoading() {
         if (progressFragment == null)
             return;
         else progressFragment.dismissAllowingStateLoss();
+    }
+
+    @Override
+    public void showMessage(String message) {
+
+    }
+
+    @Override
+    public void showError(String errMsg) {
+
     }
 
 

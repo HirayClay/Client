@@ -5,6 +5,7 @@ package com.jiqu.client.mvp.view;
  *
  */
 
-public interface LoginView {
+public interface LoginView extends AuthLoadView{
 
+    void onLogin(String msg);
 }

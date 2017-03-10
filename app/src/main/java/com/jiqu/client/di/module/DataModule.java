@@ -2,6 +2,8 @@ package com.jiqu.client.di.module;
 
 import com.jiqu.data.network.RestApiHelper;
 
+import javax.inject.Singleton;
+
 import dagger.Module;
 import dagger.Provides;
 
@@ -12,6 +14,7 @@ import dagger.Provides;
 @Module
 public class DataModule {
 
+    @Singleton
     @Provides
     RestApiHelper provideRestApiHelper(){
         return new RestApiHelper();

@@ -5,10 +5,12 @@ package com.jiqu.client.mvp.view;
  *
  */
 
-public abstract class AuthLoadView implements AuthView{
+public interface  AuthLoadView{
 
-    @Override
-    public void onAuthFail() {
+    void onAuthFail();
+    void showLoading();
+    void hideLoading();
 
-    }
+    void showMessage(String message);
+    void showError(String errMsg);
 }
