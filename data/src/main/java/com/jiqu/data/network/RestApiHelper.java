@@ -42,6 +42,7 @@ public class RestApiHelper {
     public RestApiHelper() {
 
         gson = new Gson();
+        url = new Url();
         OkHttpClient client = new OkHttpClient();
         client.networkInterceptors().add(new Interceptor() {
             @Override
@@ -55,7 +56,7 @@ public class RestApiHelper {
             }
         });
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(url.DEFAULT_URL)
+                .baseUrl(url.defaultUrl())
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
@@ -71,8 +72,7 @@ public class RestApiHelper {
             return Observable.create(new Observable.OnSubscribe<T>() {
                 @Override
                 public void call(Subscriber<? super T> subscriber) {
-                    //if request success
-                    subscriber.onStart();
+                    //if request success,check the meta info first
                     subscriber.onNext(tResponseWrapper.body);
                     subscriber.onCompleted();
                 }

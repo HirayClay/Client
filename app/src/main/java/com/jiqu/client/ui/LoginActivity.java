@@ -43,6 +43,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
     }
 
     public void login(View view) {
+        msgText.setText("please log in");
         loginPresenter.login(null, null, null);
     }
 

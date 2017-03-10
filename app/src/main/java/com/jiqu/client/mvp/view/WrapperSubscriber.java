@@ -19,11 +19,11 @@ public abstract class WrapperSubscriber<T> extends Subscriber<T> {
     public WrapperSubscriber(ReactView reactView) {
         this.reactView = reactView;
     }
-
-    public void disable() {
-        if (reactView != null)
-            reactView.disable();
-    }
+//
+//    public void disable() {
+//        if (reactView != null)
+//            reactView.disable();
+//    }
 
     public void enable() {
         if (reactView != null)

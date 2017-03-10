@@ -22,7 +22,7 @@
 
     <TextView
         android:id="@+id/msg"
-        android:text="13333"
+        android:text="please log in"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toRightOf="@+id/login_button"
