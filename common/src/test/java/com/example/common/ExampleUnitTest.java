@@ -1,4 +1,4 @@
-package com.jiqu.common;
+package com.example.common;
 
 import org.junit.Test;
 
