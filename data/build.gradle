@@ -14,7 +14,7 @@ android {
         versionName parent.ext.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
-        //ormlite db config
+        //ormlite db config,now it is deprecated,and turn to realm for database work
         buildConfigField "String", "DB_NAME", "\"jiqu.db\""
         buildConfigField "int", "DB_VERSION", "1"
 
