@@ -20,7 +20,6 @@ import dagger.Provides;
 
 /**
  * Created by CJJ on 2017/3/7.
- *
  */
 @Module
 public class ApplicationModule {
@@ -34,7 +33,7 @@ public class ApplicationModule {
 
     @Singleton
     @Provides
-    Context provideContext(){
+    Context provideContext() {
         return context;
     }
 
@@ -44,7 +43,7 @@ public class ApplicationModule {
     JobExecutor provideConcurrentJobExecutor() {
         return new JobExecutorImpl(BuildConfig.CORE_POOL_SIZE,
                 BuildConfig.MAXIMUM_POOL_SIZE,
-                BuildConfig.KEEP_ALIEVE_TIME,
+                BuildConfig.KEEP_ALIVE_TIME,
                 TimeUnit.SECONDS,
                 new LinkedBlockingQueue<Runnable>());
     }
@@ -55,14 +54,14 @@ public class ApplicationModule {
     JobExecutor provideSequentialJobExecutor() {
         return new JobExecutorImpl(1,
                 1,
-                BuildConfig.KEEP_ALIEVE_TIME,
+                BuildConfig.KEEP_ALIVE_TIME,
                 TimeUnit.SECONDS,
                 new LinkedBlockingQueue<Runnable>());
     }
 
     @Singleton
     @Provides
-    SharedPreferences provideSharePreferences(){
+    SharedPreferences provideSharePreferences() {
         return PreferenceManager.getDefaultSharedPreferences(context);
     }
 }

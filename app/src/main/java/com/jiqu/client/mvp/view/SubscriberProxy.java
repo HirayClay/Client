@@ -1,7 +1,5 @@
 package com.jiqu.client.mvp.view;
 
-import android.util.Log;
-
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 

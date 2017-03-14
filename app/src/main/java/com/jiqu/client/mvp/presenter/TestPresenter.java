@@ -48,7 +48,7 @@ public class TestPresenter {
     public void getSingleService() {
         accountRepo.getService()
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.from(seqExecutor))
+                .subscribeOn(Schedulers.io())
                 .subscribe(new Subscriber<List<Service>>() {
                     @Override
                     public void onCompleted() {

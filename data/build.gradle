@@ -21,7 +21,7 @@ android {
         //thread pool config
         buildConfigField "int", "CORE_POOL_SIZE", "5"
         buildConfigField "int", "MAXIMUM_POOL_SIZE", "5"
-        buildConfigField "int", "KEEP_ALIEVE_TIME", "10"
+        buildConfigField "int", "KEEP_ALIVE_TIME", "10"
 
     }
     buildTypes {
@@ -48,7 +48,6 @@ dependencies {
     provided rootProject.ext.dependencies.javaxAnnotation
     compile rootProject.ext.dependencies.rxJava
     compile rootProject.ext.dependencies.rxAndroid
-    compile rootProject.ext.dependencies.ormlite
     compile rootProject.ext.dependencies.retrofit
     compile rootProject.ext.dependencies.retrofitGsonConverter
     compile rootProject.ext.dependencies.retrofitRxJavaAdapter

@@ -2,6 +2,7 @@ package com.jiqu.data.repository.mock;
 
 import android.util.Log;
 
+import com.jiqu.data.mapper.ServiceMapper;
 import com.jiqu.data.network.RestApiHelper;
 import com.jiqu.data.real.RealHelper;
 import com.jiqu.domain.entity.Service;
@@ -15,6 +16,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import io.realm.Realm;
+import io.realm.RealmQuery;
 import io.realm.RealmResults;
 import rx.Observable;
 import rx.Subscriber;
@@ -30,6 +32,8 @@ public class AccountRepoMock implements AccountRepo {
     @Inject
     RestApiHelper restApiHelper;
 
+    @Inject
+    ServiceMapper serviceMapper;
     @Inject
     public AccountRepoMock() {
     }
@@ -61,18 +65,20 @@ public class AccountRepoMock implements AccountRepo {
             @Override
             public void call(final Subscriber<? super List<Service>> subscriber) {
 
+                Log.i(TAG, "call: "+Thread.currentThread().getName());
                 //query from realm,if ok ,pass to subscriber
-                Realm realm = RealHelper.getDefaultInstance();
-                RealmResults<Service> all = realm.where(Service.class).findAll();
+                Realm realm = Realm.getDefaultInstance();
+                RealmQuery<Service> where = realm.where(Service.class);
+                RealmResults<Service> all = where.findAll();
 //                realm.close();
-                Log.i(TAG, "call: "+all);
                 if (all.isEmpty()) {
                     //from network and save
                     restApiHelper.restApi().getServices().flatMap(new RestApiHelper.LocalFunc<List<Service>>()).subscribe(subscriber);
                 }else {
                     subscriber.onCompleted();
-                    subscriber.onNext(all);
+                    subscriber.onNext(serviceMapper.map(all));
                 }
+                realm.close();
 
             }
         });

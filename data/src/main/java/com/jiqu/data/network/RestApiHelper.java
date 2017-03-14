@@ -2,17 +2,14 @@ package com.jiqu.data.network;
 
 import android.util.Log;
 
-import com.jiqu.data.network.dataformat.ResponseWrapper;
 import com.google.gson.Gson;
+import com.jiqu.data.network.dataformat.ResponseWrapper;
 import com.jiqu.data.real.RealHelper;
-import com.jiqu.domain.constant.Constant;
 import com.jiqu.domain.exception.AuthException;
-import com.jiqu.domain.param.LoginParam;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
-import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 
 import java.io.IOException;
@@ -21,7 +18,6 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import io.realm.Realm;
-import io.realm.RealmList;
 import io.realm.RealmModel;
 import io.realm.RealmObject;
 import retrofit.GsonConverterFactory;
@@ -101,18 +97,18 @@ public class RestApiHelper {
 
                         if (tResponseWrapper.body != null) {
                             if (tResponseWrapper.body instanceof RealmObject || tResponseWrapper.body instanceof Iterable) {
-//                               Realm realm = Realm.getDefaultInstance();
-                                Realm realm = RealHelper.getDefaultInstance();
-                                realm.executeTransactionAsync(new Realm.Transaction() {
+                                Realm realm = Realm.getDefaultInstance();
+                                realm.executeTransaction(new Realm.Transaction() {
                                     @Override
                                     public void execute(Realm realm) {
+                                        Log.i(TAG, "execute: thread:"+Thread.currentThread());
                                         if (tResponseWrapper.body instanceof RealmObject)
-                                            realm.copyToRealm((Iterable<RealmModel>) tResponseWrapper.body);
+                                            realm.copyToRealmOrUpdate((RealmObject) tResponseWrapper.body);
                                         else
-                                            realm.copyToRealm((Iterable<RealmModel>) tResponseWrapper.body);
-//                                        realm.commitTransaction();
+                                            realm.copyToRealmOrUpdate((Iterable<RealmModel>) tResponseWrapper.body);
                                     }
                                 });
+                                realm.close();
                             } else
                                 throw new RuntimeException(tResponseWrapper.body.getClass() + " " +
                                         "is not instance of RealmObject,thus can't be saved to realm");

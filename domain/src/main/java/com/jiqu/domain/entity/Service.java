@@ -8,7 +8,7 @@ import io.realm.RealmObject;
  * @author: CJJ
  * @date 2017/3/13
  */
-public class Service extends RealmObject{
+public class Service extends RealmObject {
     //类型名称
     @SerializedName("TypeName")
     private String typeName;
@@ -20,6 +20,12 @@ public class Service extends RealmObject{
     private String serviceName;
 
     public Service() {
+    }
+
+    public Service(String typeName, String serviceId, String serviceName) {
+        this.typeName = typeName;
+        this.serviceId = serviceId;
+        this.serviceName = serviceName;
     }
 
     public String getTypeName() {
