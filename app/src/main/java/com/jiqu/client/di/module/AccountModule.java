@@ -1,7 +1,9 @@
 package com.jiqu.client.di.module;
 
 import com.jiqu.client.di.ActivityScope;
+import com.jiqu.client.mvp.view.AuthLoadView;
 import com.jiqu.client.mvp.view.LoginView;
+import com.jiqu.client.mvp.view.ServiceView;
 
 import dagger.Module;
 import dagger.Provides;
@@ -13,16 +15,26 @@ import dagger.Provides;
 @Module
 public class AccountModule {
 
-    LoginView loginView;
+    AuthLoadView view;
 
-    public AccountModule(LoginView loginView) {
-        this.loginView = loginView;
+    public AccountModule() {
+    }
+
+    public AccountModule(AuthLoadView loginView) {
+        this.view = loginView;
     }
 
     @ActivityScope
     @Provides
     LoginView loginView() {
 
-        return loginView;
+        return (LoginView) view;
+    }
+
+    @ActivityScope
+    @Provides
+    ServiceView serviceView() {
+
+        return (ServiceView) view;
     }
 }

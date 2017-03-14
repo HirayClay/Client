@@ -1,7 +1,12 @@
 package com.jiqu.data.network;
 
+import android.util.Log;
+
 import com.jiqu.data.network.dataformat.ResponseWrapper;
 import com.google.gson.Gson;
+import com.jiqu.data.real.RealHelper;
+import com.jiqu.domain.constant.Constant;
+import com.jiqu.domain.exception.AuthException;
 import com.jiqu.domain.param.LoginParam;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.MediaType;
@@ -15,6 +20,10 @@ import java.io.IOException;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import io.realm.Realm;
+import io.realm.RealmList;
+import io.realm.RealmModel;
+import io.realm.RealmObject;
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
 import retrofit.RxJavaCallAdapterFactory;
@@ -24,12 +33,10 @@ import rx.functions.Func1;
 
 /**
  * Created by CJJ on 2017/3/6.
- *
  */
 @Singleton
 public class RestApiHelper {
-
-
+    private static final String TAG = "RestApiHelper";
     RestApi restApi;
 
     Gson gson;
@@ -56,7 +63,7 @@ public class RestApiHelper {
             }
         });
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(url.defaultUrl())
+                .baseUrl("http://copen.zhujiash.com/api/v2/")
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
@@ -64,7 +71,7 @@ public class RestApiHelper {
         restApi = retrofit.create(RestApi.class);
     }
 
-    public static class ResponseParser<T> implements Func1<ResponseWrapper<T>, Observable<T>>{
+    public static class NetFunc<T> implements Func1<ResponseWrapper<T>, Observable<T>> {
 
         @Override
         public Observable<T> call(final ResponseWrapper<T> tResponseWrapper) {
@@ -80,7 +87,46 @@ public class RestApiHelper {
         }
     }
 
-    public RestApi restApi(){
+    //apart from parsing network data ,and persist those data
+    @SuppressWarnings("unchecked")
+    public static class LocalFunc<T> implements Func1<ResponseWrapper<T>, Observable<T>> {
+
+        @Override
+        public Observable<T> call(final ResponseWrapper<T> tResponseWrapper) {
+
+            return Observable.create(new Observable.OnSubscribe<T>() {
+                @Override
+                public void call(Subscriber<? super T> subscriber) {
+                    if (tResponseWrapper.isSuccess()) {
+
+                        if (tResponseWrapper.body != null) {
+                            if (tResponseWrapper.body instanceof RealmObject || tResponseWrapper.body instanceof Iterable) {
+//                               Realm realm = Realm.getDefaultInstance();
+                                Realm realm = RealHelper.getDefaultInstance();
+                                realm.executeTransactionAsync(new Realm.Transaction() {
+                                    @Override
+                                    public void execute(Realm realm) {
+                                        if (tResponseWrapper.body instanceof RealmObject)
+                                            realm.copyToRealm((Iterable<RealmModel>) tResponseWrapper.body);
+                                        else
+                                            realm.copyToRealm((Iterable<RealmModel>) tResponseWrapper.body);
+//                                        realm.commitTransaction();
+                                    }
+                                });
+                            } else
+                                throw new RuntimeException(tResponseWrapper.body.getClass() + " " +
+                                        "is not instance of RealmObject,thus can't be saved to realm");
+                        }
+                        subscriber.onNext(tResponseWrapper.body);
+                    } else if (tResponseWrapper.isAuthExpired()) {
+                        subscriber.onError(new AuthException(tResponseWrapper.errMsg));
+                    }
+                }
+            });
+        }
+    }
+
+    public RestApi restApi() {
         return restApi;
     }
 }

@@ -14,17 +14,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ProgressDialog"
+        android:textAllCaps="false"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="1dp"
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.502" />
+        app:layout_constraintHorizontal_bias="0.502"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp" />
 
     <Button
         android:onClick="nav"
         android:text="LoginActivity"
+        android:textAllCaps="false"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -32,5 +36,46 @@
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        android:id="@+id/button2"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp" />
+
+
+    <android.support.v7.widget.RecyclerView
+        android:background="@color/divider_gray"
+        android:layout_width="116dp"
+        android:layout_height="551dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/button2"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:id="@+id/recyclerView" />
+
+    <Button
+        android:id="@+id/loadData"
+        android:text="LoadData"
+        android:textAllCaps="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@+id/recyclerView"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/button2"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="@+id/button2" />
+
+    <Button
+        android:id="@+id/clearRecy"
+        android:textAllCaps="false"
+        android:text="ClearRecyclerView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@+id/loadData"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/button2" />
 </android.support.constraint.ConstraintLayout>

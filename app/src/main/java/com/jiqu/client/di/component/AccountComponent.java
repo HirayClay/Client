@@ -3,6 +3,7 @@ package com.jiqu.client.di.component;
 import com.jiqu.client.di.ActivityScope;
 import com.jiqu.client.di.module.AccountModule;
 import com.jiqu.client.ui.LoginActivity;
+import com.jiqu.client.ui.MainActivity;
 
 import dagger.Component;
 
@@ -15,4 +16,6 @@ import dagger.Component;
 public interface AccountComponent {
 
     void inject(LoginActivity loginActivity);
+
+    void inject(MainActivity mainActivity);
 }

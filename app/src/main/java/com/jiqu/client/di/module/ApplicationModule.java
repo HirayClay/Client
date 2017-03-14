@@ -30,7 +30,13 @@ public class ApplicationModule {
     public ApplicationModule(Context context) {
         this.context = context;
     }
-    //任务池等全局对象
+    //任务池,上下文等全局对象
+
+    @Singleton
+    @Provides
+    Context provideContext(){
+        return context;
+    }
 
     @Singleton
     @Provides

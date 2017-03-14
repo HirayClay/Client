@@ -16,9 +16,10 @@ import android.view.View;
 
 import com.jiqu.client.R;
 
+import static android.graphics.Bitmap.createBitmap;
+
 /**
  * Created by CJJ on 2017/3/9.
- *
  */
 
 public class MaterialCircleView extends View {
@@ -47,6 +48,7 @@ public class MaterialCircleView extends View {
     private int blue = 255;
 
     int phase = 0;
+    private static final PorterDuffXfermode CLEAR_PORTERDUFF = new PorterDuffXfermode(PorterDuff.Mode.CLEAR);
 
 
     public MaterialCircleView(Context context) {
@@ -80,13 +82,13 @@ public class MaterialCircleView extends View {
         mPaint = new Paint();
         if (isbGradient()) {
             mPaint.setColor(Color.rgb(red, green, blue));
-        }else {
+        } else {
             mPaint.setColor(circleColor);
         }
         mPaint.setAntiAlias(true);
+
         setBackgroundColor(getResources().getColor(android.R.color.transparent));
     }
-
 
 
     @Override
@@ -100,6 +102,7 @@ public class MaterialCircleView extends View {
     }
 
     private int colorDelta = 2;
+
     private void checkPaint() {
         if (isbGradient()) {
             switch (phase % 5) {
@@ -107,7 +110,7 @@ public class MaterialCircleView extends View {
                     green += colorDelta;
                     if (green > 255) {
                         green = 255;
-                        phase ++;
+                        phase++;
                     }
                     break;
                 case 1:
@@ -116,14 +119,14 @@ public class MaterialCircleView extends View {
                     if (red > 255) {
                         red = 255;
                         green = 0;
-                        phase ++;
+                        phase++;
                     }
                     break;
                 case 2:
                     blue -= colorDelta;
                     if (blue < 0) {
                         blue = 0;
-                        phase ++;
+                        phase++;
                     }
                     break;
                 case 3:
@@ -132,7 +135,7 @@ public class MaterialCircleView extends View {
                     if (red < 0) {
                         red = 0;
                         green = 255;
-                        phase ++;
+                        phase++;
                     }
                     break;
                 case 4:
@@ -141,7 +144,7 @@ public class MaterialCircleView extends View {
                     if (green < 0) {
                         green = 0;
                         blue = 255;
-                        phase ++;
+                        phase++;
                     }
                     break;
             }
@@ -159,7 +162,7 @@ public class MaterialCircleView extends View {
         }
         if (endAngle >= 280 || startAngle > minAngle) {
             startAngle += 6;
-            if(endAngle > 20) {
+            if (endAngle > 20) {
                 endAngle -= 6;
             }
 
@@ -173,13 +176,13 @@ public class MaterialCircleView extends View {
         checkPaint();
         canvas.rotate(curAngle += rotateDelta, halfWidth, halfHeight);
 
-        Bitmap bitmap = Bitmap.createBitmap(sWidth, sHeight, Bitmap.Config.ARGB_8888);
+        Bitmap bitmap = createBitmap(sWidth, sHeight, Bitmap.Config.ARGB_8888);
         Canvas bmpCanvas = new Canvas(bitmap);
         bmpCanvas.drawArc(new RectF(0, 0, sWidth, sHeight), startAngle, endAngle, true, mPaint);
         Paint transparentPaint = new Paint();
         transparentPaint.setAntiAlias(true);
         transparentPaint.setColor(getResources().getColor(android.R.color.transparent));
-        transparentPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+        transparentPaint.setXfermode(CLEAR_PORTERDUFF);
         bmpCanvas.drawCircle(halfWidth, halfHeight,
                 halfWidth - circleWidth, transparentPaint);
         canvas.drawBitmap(bitmap, 0, 0, new Paint());
@@ -190,7 +193,7 @@ public class MaterialCircleView extends View {
     /**
      * Convert Dp to Pixel
      */
-    public static int dpToPx(float dp, Resources resources){
+    public static int dpToPx(float dp, Resources resources) {
         float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, resources.getDisplayMetrics());
         return (int) px;
     }

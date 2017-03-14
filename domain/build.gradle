@@ -1,23 +1,38 @@
 import com.sun.org.apache.xalan.internal.xsltc.cmdline.Compile
+apply plugin: 'com.android.library'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'realm-android'
 
-apply plugin: 'java'
+android {
+    compileSdkVersion parent.ext.compileSdkVersion
+    buildToolsVersion parent.ext.buildToolsVersion
 
-configurations{
-    provided
-}
+    defaultConfig {
 
-sourceCompatibility = JavaVersion.VERSION_1_7
-targetCompatibility = JavaVersion.VERSION_1_7
-tasks.withType(Compile) {
-    options.encoding = "UTF-8"
+        minSdkVersion parent.ext.minSdkVersion
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceCompatibility = JavaVersion.VERSION_1_7
+    targetCompatibility = JavaVersion.VERSION_1_7
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    testCompile 'junit:junit:4.12'
     compile rootProject.ext.dependencies.rxJava
     compile rootProject.ext.dependencies.dagger
     provided rootProject.ext.dependencies.daggerCompiler
     provided rootProject.ext.dependencies.javaxAnnotation
     compile rootProject.ext.dependencies.retrofitGsonConverter
-    testCompile 'junit:junit:4.12'
 }
+

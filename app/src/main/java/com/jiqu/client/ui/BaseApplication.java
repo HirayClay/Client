@@ -6,6 +6,8 @@ import com.jiqu.client.di.component.ApplicationComponent;
 import com.jiqu.client.di.component.DaggerApplicationComponent;
 import com.jiqu.client.di.module.ApplicationModule;
 
+import io.realm.Realm;
+
 /**
  * Created by CJJ on 2017/3/7.
  *
@@ -20,6 +22,7 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         initializeInjector();
+        Realm.init(this);
 
     }
 

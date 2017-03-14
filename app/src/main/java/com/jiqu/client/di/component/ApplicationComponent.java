@@ -5,7 +5,10 @@ import com.jiqu.client.di.module.DataModule;
 import com.jiqu.client.di.module.DomainModule;
 import com.jiqu.client.di.module.mock.MockModule;
 import com.jiqu.client.ui.BaseActivity;
+import com.jiqu.data.executor.Concurrent;
+import com.jiqu.data.executor.Sequential;
 import com.jiqu.data.network.RestApiHelper;
+import com.jiqu.domain.executor.JobExecutor;
 import com.jiqu.domain.repository.AccountRepo;
 
 import javax.inject.Named;
@@ -31,5 +34,11 @@ public interface ApplicationComponent {
     @Named("mock")
     AccountRepo mockAccountRepo();
 
+
+    @Sequential
+    JobExecutor sequentialJobExecutor();
+
+    @Concurrent
+    JobExecutor concurrentJobExecutor();
 
 }

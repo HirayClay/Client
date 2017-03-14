@@ -1,9 +1,12 @@
 package com.jiqu.data.network;
 
 import com.jiqu.data.network.dataformat.ResponseWrapper;
+import com.jiqu.domain.entity.Service;
 import com.jiqu.domain.param.LoginParam;
-import com.squareup.okhttp.RequestBody;
 
+import java.util.List;
+
+import io.realm.RealmList;
 import retrofit.http.Body;
 import retrofit.http.POST;
 import rx.Observable;
@@ -19,5 +22,8 @@ public interface RestApi {
     @POST("account/login")
     Observable<ResponseWrapper<String>> login(@Body LoginParam loginParam);
 
+
+    @POST("SystemService/InfoListEx")
+    Observable<ResponseWrapper<List<Service>>> getServices();
 
 }
