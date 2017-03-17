@@ -1,6 +1,7 @@
 package com.jiqu.domain.entity;
 
 import com.google.gson.annotations.SerializedName;
+import com.processor.Mapper;
 
 import io.realm.RealmObject;
 
@@ -8,6 +9,7 @@ import io.realm.RealmObject;
  * @author: CJJ
  * @date 2017/3/13
  */
+@Mapper
 public class Service extends RealmObject {
     //类型名称
     @SerializedName("TypeName")

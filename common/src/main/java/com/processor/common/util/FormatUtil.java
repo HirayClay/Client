@@ -1,4 +1,4 @@
-package com.example.common.util;
+package com.processor.common.util;
 
 /**
  * Created by CJJ on 2017/3/10.

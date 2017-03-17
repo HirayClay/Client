@@ -1,5 +1,5 @@
 *.iml
-*jks
+*.jks
 .gradle
 /local.properties
 /.idea/workspace.xml
@@ -14,3 +14,5 @@
 package.json
 .externalNativeBuild
 data/src/main/java/com/jiqu/data/repository/datasource/
+common/libs/
+common/src/main/res/drawable/

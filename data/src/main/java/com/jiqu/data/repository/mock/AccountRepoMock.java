@@ -2,10 +2,9 @@ package com.jiqu.data.repository.mock;
 
 import android.util.Log;
 
-import com.jiqu.data.mapper.ServiceMapper;
 import com.jiqu.data.network.RestApiHelper;
-import com.jiqu.data.real.RealHelper;
 import com.jiqu.domain.entity.Service;
+import com.jiqu.domain.entity.ServiceMapper;
 import com.jiqu.domain.entity.UserInfo;
 import com.jiqu.domain.param.LoginParam;
 import com.jiqu.domain.repository.AccountRepo;
@@ -32,8 +31,10 @@ public class AccountRepoMock implements AccountRepo {
     @Inject
     RestApiHelper restApiHelper;
 
+
     @Inject
     ServiceMapper serviceMapper;
+
     @Inject
     public AccountRepoMock() {
     }
@@ -70,13 +71,13 @@ public class AccountRepoMock implements AccountRepo {
                 Realm realm = Realm.getDefaultInstance();
                 RealmQuery<Service> where = realm.where(Service.class);
                 RealmResults<Service> all = where.findAll();
-//                realm.close();
                 if (all.isEmpty()) {
                     //from network and save
                     restApiHelper.restApi().getServices().flatMap(new RestApiHelper.LocalFunc<List<Service>>()).subscribe(subscriber);
                 }else {
                     subscriber.onCompleted();
-                    subscriber.onNext(serviceMapper.map(all));
+                    Log.i(TAG, "call: "+all);
+                    subscriber.onNext(all);
                 }
                 realm.close();
 

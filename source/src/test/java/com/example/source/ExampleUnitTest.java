@@ -1,4 +1,4 @@
-package com.example.source;
+package com.processor.source;
 
 import org.junit.Test;
 
