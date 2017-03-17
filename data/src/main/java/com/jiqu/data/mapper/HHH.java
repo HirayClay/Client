@@ -9,7 +9,7 @@ import java.util.List;
  * @author: CJJ
  * @date 2017/3/14
  */
-public class ServiceMapper {
+public class HHH {
 
 
     public Service map(Service service) {
