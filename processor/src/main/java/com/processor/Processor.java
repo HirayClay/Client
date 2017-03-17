@@ -63,7 +63,7 @@ public class Processor extends AbstractProcessor {
         return true;
     }
 
-    public void parseElements(Set<? extends Element> annotationelements) {
+    private void parseElements(Set<? extends Element> annotationelements) {
         Iterator<? extends Element> iterator = annotationelements.iterator();
         while (iterator.hasNext()) {
             Element ele = iterator.next();
@@ -160,6 +160,7 @@ public class Processor extends AbstractProcessor {
             TypeMirror returnType = me.getReturnType();
 
             if (returnType.getKind() == TypeKind.VOID) {
+                assert getter != null;
                 TypeMirror getterReturnType = getter.getReturnType();
                 setter = me;
                 List<? extends TypeMirror> typeArguments = ((DeclaredType) getterReturnType).getTypeArguments();
@@ -192,7 +193,7 @@ public class Processor extends AbstractProcessor {
     private void nestCreate(String source, String s, MethodSpec.Builder methodBuilder, List<? extends ExecutableElement> methodElements) {
 
         ExecutableElement getter = null;
-        ExecutableElement setter = null;
+        ExecutableElement setter;
         TypeMirror typeMirror = null;
 
         for (ExecutableElement me :
@@ -204,6 +205,7 @@ public class Processor extends AbstractProcessor {
                 TypeName typeName = TypeName.get(typeMirror);
                 methodBuilder.addStatement("$T " + copyName + " = new $T()", typeName, typeName);
                 methodBuilder.addStatement("$T " + copySourceName + " = " + s + "." + getter.getSimpleName() + "()", typeName);
+                assert typeMirror != null;
                 List<? extends ExecutableElement> methods = findMethods((((DeclaredType) typeMirror).asElement()).getEnclosedElements(), true);
                 glue(methodBuilder, copyName, copySourceName, methods);
                 nestCreate(copyName, s, methodBuilder, findNoPrimitiveMethods((((DeclaredType) typeMirror).asElement()).getEnclosedElements()));
@@ -238,8 +240,8 @@ public class Processor extends AbstractProcessor {
      * find all no-primitive methods that parameters are not all primitive type or return
      * type is not primitive
      *
-     * @param enclosedElements
-     * @return
+     * @param enclosedElements ..
+     * @return ..
      */
     private List<? extends ExecutableElement> findNoPrimitiveMethods(List<? extends Element> enclosedElements) {
         List<ExecutableElement> executableElements = new ArrayList<>();
@@ -258,8 +260,8 @@ public class Processor extends AbstractProcessor {
     }
 
     /**
-     * @param enclosedElements
-     * @return
+     * @param enclosedElements ..
+     * @return ..
      */
     private List<? extends ExecutableElement> findCollectionMethods(List<? extends Element> enclosedElements) {
         List<ExecutableElement> executableElements = new ArrayList<>();
@@ -281,7 +283,7 @@ public class Processor extends AbstractProcessor {
      * @param enclosedElements ..
      * @param filterPrimitive  find all the method that parameter is primitive if set true,otherwise
      *                         find all methods
-     * @return
+     * @return ...
      */
     private List<? extends ExecutableElement> findMethods(List<? extends Element> enclosedElements, boolean filterPrimitive) {
         List<ExecutableElement> executableElements = new ArrayList<>();
@@ -299,8 +301,8 @@ public class Processor extends AbstractProcessor {
 
 
     /**
-     * @param element
-     * @return
+     * @param element ...
+     * @return ..
      */
     private boolean isPrimitiveMethod(ExecutableElement element) {
         TypeMirror typeMirror = element.getReturnType();
@@ -308,9 +310,7 @@ public class Processor extends AbstractProcessor {
         if (kind.isPrimitive())
             return true;
         else if (kind == TypeKind.DECLARED) {
-            if (typeMirror.toString().equals("java.lang.String"))
-                return true;
-            return false;
+            return typeMirror.toString().equals("java.lang.String");
         } else {
             return isPrimitiveParameters(element.getParameters());
         }
@@ -339,8 +339,8 @@ public class Processor extends AbstractProcessor {
      * check if the method's parameter contains no-primitive type,
      * if so this method is not  primitive field's getter or setter
      *
-     * @param parameters
-     * @return
+     * @param parameters ..
+     * @return ..
      */
     private boolean isPrimitiveParameters(List<? extends VariableElement> parameters) {
         for (VariableElement parameterEle :
@@ -360,9 +360,9 @@ public class Processor extends AbstractProcessor {
         return SourceVersion.latestSupported();
     }
 
-    boolean isPrimitiveType(TypeMirror typeMirror) {
-        for (int i = 0; i < BASE_TYPES.length; i++) {
-            if (BASE_TYPES[i].equals(typeMirror.toString()))
+    private boolean isPrimitiveType(TypeMirror typeMirror) {
+        for (String BASE_TYPE : BASE_TYPES) {
+            if (BASE_TYPE.equals(typeMirror.toString()))
                 return true;
         }
         return false;
