@@ -12,6 +12,7 @@ import com.squareup.javapoet.TypeSpec;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -34,6 +35,9 @@ import javax.lang.model.type.TypeKind;
 import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.Elements;
 
+import dagger.Module;
+import dagger.Provides;
+
 /**
  * Created by CJJ on 2017/3/15.
  *
@@ -48,6 +52,8 @@ public class Processor extends AbstractProcessor {
     private static final ClassName LIST = ClassName.get("java.util", "List");
     private static final ClassName ARRAYLIST = ClassName.get("java.util", "ArrayList");
     private Elements elementUtils;
+    private Set<String> mapperClass = new HashSet<>();
+    private boolean created = false;
 
     @Override
     public synchronized void init(ProcessingEnvironment processingEnv) {
@@ -95,15 +101,19 @@ public class Processor extends AbstractProcessor {
                     .returns(listRaw)
                     .build();
 
+            String clazzName  =ele.getSimpleName() + "Mapper";
 
-            TypeSpec typeBuilder = TypeSpec.classBuilder(ele.getSimpleName() + "Mapper")
+            TypeSpec typeBuilder = TypeSpec.classBuilder(clazzName)
                     .addMethod(mapMethod)
                     .addMethod(listMapMethod)
                     .addAnnotation(Singleton.class)
                     .addModifiers(Modifier.PUBLIC)
                     .build();
 
-            JavaFile javaFile = JavaFile.builder(getPackageName(ele), typeBuilder).build();
+            String packageName = getPackageName(ele);
+            JavaFile javaFile = JavaFile.builder(packageName, typeBuilder).build();
+            System.out.println("==========Adding===="+(packageName + "." + clazzName));
+            mapperClass.add(packageName + "." + clazzName);
             try {
                 javaFile.writeTo(mFiler);
 
@@ -111,7 +121,44 @@ public class Processor extends AbstractProcessor {
                 e.printStackTrace();
             }
         }
+        createMapperModule();
+    }
 
+    private void createMapperModule() {
+        if (created)return;
+        System.out.println("=================CreatingMapperModule==========================");
+        Iterator<String> iterator = mapperClass.iterator();
+        List<MethodSpec> methodSpecs = new ArrayList<>();
+        while (iterator.hasNext()) {
+            String mapperClassName = iterator.next();
+            System.out.println("=====================================ModuleElements==========="+mapperClassName);
+            ClassName className = ClassName.bestGuess(mapperClassName);
+            int beginIndex = mapperClassName.lastIndexOf(".") > 0 ? mapperClassName.lastIndexOf(".") + 1 : 0;
+            String suffix = mapperClassName.substring(beginIndex);
+            MethodSpec methodSpec = MethodSpec.methodBuilder("provide" + suffix)
+                    .addAnnotation(Provides.class)
+                    .addAnnotation(Singleton.class)
+                    .returns(className)
+                    .addModifiers(Modifier.PUBLIC)
+                    .addStatement("return new $T()", className).build();
+            methodSpecs.add(methodSpec);
+        }
+
+        TypeSpec.Builder typeSpec = TypeSpec.classBuilder("MapperModule").addModifiers(Modifier.PUBLIC);
+        for (int i = 0; i < methodSpecs.size(); i++) {
+            typeSpec.addMethod(methodSpecs.get(i));
+        }
+        TypeSpec spec = typeSpec.addAnnotation(Module.class)
+                .build();
+        JavaFile javaFile = JavaFile.builder("com.jiqu.client.di.module", spec).build();
+        try {
+
+            javaFile.writeTo(mFiler);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        mapperClass.clear();
+        created = true;
     }
 
     private String getPackageName(Element ele) {

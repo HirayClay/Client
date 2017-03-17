@@ -8,8 +8,6 @@ import com.jiqu.client.di.module.mock.MockModule;
 import com.jiqu.client.ui.BaseActivity;
 import com.jiqu.data.executor.Concurrent;
 import com.jiqu.data.executor.Sequential;
-import com.jiqu.data.network.RestApiHelper;
-import com.jiqu.domain.entity.ServiceMapper;
 import com.jiqu.domain.executor.JobExecutor;
 import com.jiqu.domain.repository.AccountRepo;
 
