@@ -1,5 +1,6 @@
 package com.processor;
 
+import com.annno.Mapper;
 import com.google.auto.service.AutoService;
 import com.google.common.collect.ImmutableSet;
 import com.squareup.javapoet.ClassName;
