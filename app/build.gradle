@@ -43,7 +43,6 @@ dependencies {
     compile rootProject.ext.dependencies.androidSupportDesign
     compile rootProject.ext.dependencies.butterKnife
     compile rootProject.ext.dependencies.dagger
-    apt rootProject.ext.dependencies.daggerCompiler
     provided rootProject.ext.dependencies.javaxAnnotation
     compile rootProject.ext.dependencies.androidSupportDesign
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -51,6 +50,7 @@ dependencies {
     })
     compile project(':data')
     compile project(':domain')
+
     compile project(':common')
     // optional
     compile 'com.android.support:support-v4:23.4.0'
@@ -58,7 +58,7 @@ dependencies {
     compile 'com.flipboard:bottomsheet-commons:1.5.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.1'
     //apt
-    apt project(':processor')
-    compile project(':processor')
+//    compile project(':processor')
+    apt rootProject.ext.dependencies.daggerCompiler
     testCompile 'junit:junit:4.12'
 }

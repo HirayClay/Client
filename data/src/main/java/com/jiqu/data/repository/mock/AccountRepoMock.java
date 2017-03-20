@@ -77,7 +77,7 @@ public class AccountRepoMock implements AccountRepo {
                 }else {
                     subscriber.onCompleted();
                     Log.i(TAG, "call: "+all);
-                    subscriber.onNext(all);
+                    subscriber.onNext(serviceMapper.map(all));
                 }
                 realm.close();
 

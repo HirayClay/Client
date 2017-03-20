@@ -1,7 +1,7 @@
 package com.jiqu.domain.entity;
 
+import com.annno.Mapper;
 import com.google.gson.annotations.SerializedName;
-import com.processor.Mapper;
 
 import io.realm.RealmObject;
 

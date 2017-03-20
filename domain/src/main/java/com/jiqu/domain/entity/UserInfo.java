@@ -2,7 +2,6 @@ package com.jiqu.domain.entity;
 
 /**
  * Created by CJJ on 2017/3/13.
- *
  */
 
 public class UserInfo {

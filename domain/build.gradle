@@ -28,11 +28,12 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     testCompile 'junit:junit:4.12'
-    compile project(':processor')
     compile rootProject.ext.dependencies.rxJava
     compile rootProject.ext.dependencies.dagger
     provided rootProject.ext.dependencies.daggerCompiler
     provided rootProject.ext.dependencies.javaxAnnotation
     compile rootProject.ext.dependencies.retrofitGsonConverter
+    apt project(':processor')
+    compile project(':annotation')
 }
 
