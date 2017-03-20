@@ -1,5 +1,6 @@
 package com.jiqu.domain.entity;
 
+
 import com.google.gson.annotations.SerializedName;
 import com.processor.Mapper;
 

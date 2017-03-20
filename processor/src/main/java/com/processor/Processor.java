@@ -40,12 +40,12 @@ import dagger.Provides;
 
 /**
  * Created by CJJ on 2017/3/15.
- *
  */
 @AutoService(javax.annotation.processing.Processor.class)
 public class Processor extends AbstractProcessor {
 
     public static final boolean DEBUG = true;
+    private static final String MODULE_PACKAGE = "com.jiqu.domain.entity";
     private Filer mFiler;
     //in this situation,includes String type
     private static final String[] BASE_TYPES = {"int", "java.lang.String", "long", "char", "short", "byte", "boolean", "double", "float"};
@@ -53,7 +53,7 @@ public class Processor extends AbstractProcessor {
     private static final ClassName ARRAYLIST = ClassName.get("java.util", "ArrayList");
     private Elements elementUtils;
     private Set<String> mapperClass = new HashSet<>();
-    private boolean created = false;
+    private static boolean created = false;
 
     @Override
     public synchronized void init(ProcessingEnvironment processingEnv) {
@@ -65,12 +65,13 @@ public class Processor extends AbstractProcessor {
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
         Set<? extends Element> elementsAnnotatedWith = roundEnv.getElementsAnnotatedWith(Mapper.class);
-        parseElements(elementsAnnotatedWith);
-        return true;
+        if (!created)
+            parseElements(elementsAnnotatedWith);
+        return created = true;
     }
 
-    private void parseElements(Set<? extends Element> annotationelements) {
-        Iterator<? extends Element> iterator = annotationelements.iterator();
+    private void parseElements(Set<? extends Element> annotationElements) {
+        Iterator<? extends Element> iterator = annotationElements.iterator();
         while (iterator.hasNext()) {
             Element ele = iterator.next();
             TypeMirror typeMirror = ele.asType();
@@ -85,7 +86,7 @@ public class Processor extends AbstractProcessor {
             methodBuilder.addStatement("return " + copyName);
             MethodSpec mapMethod = methodBuilder.build();
             //if need "List<T> map(List<T> list)"
-            ParameterizedTypeName listRaw = ParameterizedTypeName.get(LIST,ClassName.get(typeMirror));
+            ParameterizedTypeName listRaw = ParameterizedTypeName.get(LIST, ClassName.get(typeMirror));
             ParameterizedTypeName arrayListRaw = ParameterizedTypeName.get(ARRAYLIST, ClassName.get(typeMirror));
             MethodSpec listMapMethod = MethodSpec.methodBuilder("map")
                     .addModifiers(Modifier.PUBLIC)
@@ -93,7 +94,7 @@ public class Processor extends AbstractProcessor {
                     .addStatement("$T copies = new $T()", listRaw, arrayListRaw)
                     .beginControlFlow("for(int i=0;i<sources.size();i++)")
                     .addStatement("$T copy = null;", TypeName.get(typeMirror))
-                    .addStatement("$T source = sources.get(i)",TypeName.get(typeMirror))
+                    .addStatement("$T source = sources.get(i)", TypeName.get(typeMirror))
                     .addStatement("copy = map(source)")
                     .addStatement("copies.add(copy)")
                     .endControlFlow()
@@ -101,7 +102,7 @@ public class Processor extends AbstractProcessor {
                     .returns(listRaw)
                     .build();
 
-            String clazzName  =ele.getSimpleName() + "Mapper";
+            String clazzName = ele.getSimpleName() + "Mapper";
 
             TypeSpec typeBuilder = TypeSpec.classBuilder(clazzName)
                     .addMethod(mapMethod)
@@ -109,10 +110,9 @@ public class Processor extends AbstractProcessor {
                     .addAnnotation(Singleton.class)
                     .addModifiers(Modifier.PUBLIC)
                     .build();
-
             String packageName = getPackageName(ele);
             JavaFile javaFile = JavaFile.builder(packageName, typeBuilder).build();
-            System.out.println("==========Adding===="+(packageName + "." + clazzName));
+            System.out.println("==========Adding====" + (packageName + "." + clazzName));
             mapperClass.add(packageName + "." + clazzName);
             try {
                 javaFile.writeTo(mFiler);
@@ -125,13 +125,12 @@ public class Processor extends AbstractProcessor {
     }
 
     private void createMapperModule() {
-        if (created)return;
         System.out.println("=================CreatingMapperModule==========================");
         Iterator<String> iterator = mapperClass.iterator();
         List<MethodSpec> methodSpecs = new ArrayList<>();
         while (iterator.hasNext()) {
             String mapperClassName = iterator.next();
-            System.out.println("=====================================ModuleElements==========="+mapperClassName);
+            System.out.println("=====================================ModuleElements===========" + mapperClassName);
             ClassName className = ClassName.bestGuess(mapperClassName);
             int beginIndex = mapperClassName.lastIndexOf(".") > 0 ? mapperClassName.lastIndexOf(".") + 1 : 0;
             String suffix = mapperClassName.substring(beginIndex);
@@ -150,15 +149,14 @@ public class Processor extends AbstractProcessor {
         }
         TypeSpec spec = typeSpec.addAnnotation(Module.class)
                 .build();
-        JavaFile javaFile = JavaFile.builder("com.jiqu.client.di.module", spec).build();
+        JavaFile javaFile = JavaFile.builder(MODULE_PACKAGE, spec).build();
         try {
 
             javaFile.writeTo(mFiler);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        mapperClass.clear();
-        created = true;
+
     }
 
     private String getPackageName(Element ele) {
