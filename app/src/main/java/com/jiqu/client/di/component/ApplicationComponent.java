@@ -3,11 +3,11 @@ package com.jiqu.client.di.component;
 import com.jiqu.client.di.module.ApplicationModule;
 import com.jiqu.client.di.module.DataModule;
 import com.jiqu.client.di.module.DomainModule;
+import com.jiqu.client.di.module.MapperModule;
 import com.jiqu.client.di.module.mock.MockModule;
 import com.jiqu.client.ui.BaseActivity;
 import com.jiqu.data.executor.Concurrent;
 import com.jiqu.data.executor.Sequential;
-import com.jiqu.domain.entity.MapperModule;
 import com.jiqu.domain.executor.JobExecutor;
 import com.jiqu.domain.repository.AccountRepo;
 

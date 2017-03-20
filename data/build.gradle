@@ -43,7 +43,7 @@ android {
 
 dependencies {
     compile rootProject.ext.dependencies.androidSupportV7
-    compile rootProject.ext.dependencies.dagger
+    provided rootProject.ext.dependencies.dagger
     apt rootProject.ext.dependencies.daggerCompiler
     provided rootProject.ext.dependencies.javaxAnnotation
     compile rootProject.ext.dependencies.rxJava

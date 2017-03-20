@@ -45,7 +45,7 @@ import dagger.Provides;
 public class Processor extends AbstractProcessor {
 
     public static final boolean DEBUG = true;
-    private static final String MODULE_PACKAGE = "com.jiqu.domain.entity";
+    private static final String MODULE_PACKAGE = "com.jiqu.client.di.module";
     private Filer mFiler;
     //in this situation,includes String type
     private static final String[] BASE_TYPES = {"int", "java.lang.String", "long", "char", "short", "byte", "boolean", "double", "float"};
@@ -67,7 +67,8 @@ public class Processor extends AbstractProcessor {
         Set<? extends Element> elementsAnnotatedWith = roundEnv.getElementsAnnotatedWith(Mapper.class);
         if (!created)
             parseElements(elementsAnnotatedWith);
-        return created = true;
+        created = true;
+        return true;
     }
 
     private void parseElements(Set<? extends Element> annotationElements) {
@@ -112,7 +113,6 @@ public class Processor extends AbstractProcessor {
                     .build();
             String packageName = getPackageName(ele);
             JavaFile javaFile = JavaFile.builder(packageName, typeBuilder).build();
-            System.out.println("==========Adding====" + (packageName + "." + clazzName));
             mapperClass.add(packageName + "." + clazzName);
             try {
                 javaFile.writeTo(mFiler);
@@ -125,12 +125,10 @@ public class Processor extends AbstractProcessor {
     }
 
     private void createMapperModule() {
-        System.out.println("=================CreatingMapperModule==========================");
         Iterator<String> iterator = mapperClass.iterator();
         List<MethodSpec> methodSpecs = new ArrayList<>();
         while (iterator.hasNext()) {
             String mapperClassName = iterator.next();
-            System.out.println("=====================================ModuleElements===========" + mapperClassName);
             ClassName className = ClassName.bestGuess(mapperClassName);
             int beginIndex = mapperClassName.lastIndexOf(".") > 0 ? mapperClassName.lastIndexOf(".") + 1 : 0;
             String suffix = mapperClassName.substring(beginIndex);
@@ -141,9 +139,11 @@ public class Processor extends AbstractProcessor {
                     .addModifiers(Modifier.PUBLIC)
                     .addStatement("return new $T()", className).build();
             methodSpecs.add(methodSpec);
+
         }
 
         TypeSpec.Builder typeSpec = TypeSpec.classBuilder("MapperModule").addModifiers(Modifier.PUBLIC);
+
         for (int i = 0; i < methodSpecs.size(); i++) {
             typeSpec.addMethod(methodSpecs.get(i));
         }
@@ -164,7 +164,6 @@ public class Processor extends AbstractProcessor {
             PackageElement packageElement = elementUtils.getPackageOf(ele);
             if (!packageElement.isUnnamed()) {
                 String pkgName = packageElement.getQualifiedName().toString();
-                System.out.println(pkgName);
                 return pkgName;
             }
         }
