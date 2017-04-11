@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="radiobutton_drawable_text_space">3dp</dimen>
+
+    <dimen name="page_border_padding">9dp</dimen>
+    <dimen name="padding_small">6dp</dimen>
+    <dimen name="page_start_spacing">18dp</dimen>
+    <dimen name="margin_small">6dp</dimen>
+
+</resources>

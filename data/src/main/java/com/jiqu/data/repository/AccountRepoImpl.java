@@ -16,7 +16,6 @@ import rx.Subscriber;
 
 /**
  * Created by CJJ on 2017/3/7.
- *
  */
 @Singleton
 public class AccountRepoImpl implements AccountRepo {
@@ -32,7 +31,7 @@ public class AccountRepoImpl implements AccountRepo {
     @Override
     public Observable<String> login(LoginParam param) {
         return restApiHelper.restApi()
-                .login(param).flatMap(new RestApiHelper.NetFunc<String>());
+                .login(param).flatMap(new RestApiHelper.TokenFunc<String>());
     }
 
     @Override

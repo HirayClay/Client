@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.jiqu.client.ui.home.HomeActivity">
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/action_group" />
+
+    <RadioGroup
+        android:id="@+id/action_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:checkedButton="@+id/home_page"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/home_page"
+            android:layout_width="0dp"
+            android:drawableTop="@mipmap/icon_home"
+            android:text="首页"
+            android:drawablePadding="@dimen/radiobutton_drawable_text_space"
+            android:textAllCaps="false"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null" />
+
+        <RadioButton
+            android:id="@+id/joy_page"
+            android:layout_width="0dp"
+            android:drawableTop="@mipmap/icon_entertainment"
+            android:text="娱乐"
+            android:drawablePadding="@dimen/radiobutton_drawable_text_space"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null" />
+
+        <RadioButton
+            android:id="@+id/new_bee_page"
+            android:layout_width="0dp"
+            android:drawableTop="@mipmap/icon_newbee"
+            android:text="新手"
+            android:drawablePadding="@dimen/radiobutton_drawable_text_space"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null" />
+
+        <RadioButton
+            android:id="@+id/mine_page"
+            android:layout_width="0dp"
+            android:drawableTop="@mipmap/icon_mine"
+            android:text="我的"
+            android:drawablePadding="@dimen/radiobutton_drawable_text_space"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null" />
+    </RadioGroup>
+
+
+</RelativeLayout>

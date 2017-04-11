@@ -1,5 +1,8 @@
 package com.jiqu.data.network;
 
+import android.content.SharedPreferences;
+import android.support.annotation.IntDef;
+
 import com.google.gson.Gson;
 import com.jiqu.data.network.dataformat.ResponseWrapper;
 import com.jiqu.domain.exception.AuthException;
@@ -35,6 +38,9 @@ public class RestApiHelper {
     Gson gson;
 
     Url url;
+
+    @Inject
+    SharedPreferences sharedPreferences;
 
     public static MediaType MEDIA_TYPE_JSON = MediaType.parse("application/json");
 
@@ -92,27 +98,45 @@ public class RestApiHelper {
                 public void call(Subscriber<? super T> subscriber) {
                     if (tResponseWrapper.isSuccess()) {
 
-                        if (tResponseWrapper.body != null) {
-                            if (tResponseWrapper.body instanceof RealmObject || tResponseWrapper.body instanceof Iterable) {
+                        final T body = tResponseWrapper.body;
+                        if (body != null) {
+                            if (body instanceof RealmObject ||
+                                    body instanceof Iterable) {
+
                                 Realm realm = Realm.getDefaultInstance();
                                 realm.executeTransaction(new Realm.Transaction() {
                                     @Override
                                     public void execute(Realm realm) {
-                                        if (tResponseWrapper.body instanceof RealmObject)
-                                            realm.copyToRealmOrUpdate((RealmObject) tResponseWrapper.body);
+                                        if (body instanceof RealmObject)
+                                            realm.copyToRealmOrUpdate((RealmObject) body);
                                         else
-                                            realm.copyToRealmOrUpdate((Iterable<RealmModel>) tResponseWrapper.body);
+                                            realm.copyToRealmOrUpdate((Iterable<RealmModel>) body);
                                     }
                                 });
                                 realm.close();
                             } else
-                                throw new RuntimeException(tResponseWrapper.body.getClass() + " " +
+                                throw new RuntimeException(body.getClass() + " " +
                                         "is not instance of RealmObject,thus can't be saved to realm");
                         }
-                        subscriber.onNext(tResponseWrapper.body);
+                        subscriber.onNext(body);
                     } else if (tResponseWrapper.isAuthExpired()) {
                         subscriber.onError(new AuthException(tResponseWrapper.errMsg));
                     }
+                }
+            });
+        }
+    }
+
+    //保存token  T类型视具体Token的返回所在对象的类型而定
+    public static final class TokenFunc<T> implements Func1<ResponseWrapper<T>, Observable<String>> {
+
+        @Override
+        public Observable<String> call(ResponseWrapper<T> responseWrapper) {
+            T body = responseWrapper.body;
+            return Observable.create(new Observable.OnSubscribe<String>() {
+                @Override
+                public void call(Subscriber<? super String> subscriber) {
+                    subscriber.onNext("");
                 }
             });
         }

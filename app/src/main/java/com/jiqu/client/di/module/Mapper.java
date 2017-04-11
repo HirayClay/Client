@@ -6,6 +6,8 @@ import dagger.Module;
  * @author: CJJ
  * @date 2017/3/20
  * why hand-written is okay,but apt-generated "MapperModule" has multiple module
+ * <p>
+ * 2017/4/7 apt generated code is working now,we don't need to write these dummy code
  */
 @Module
 public class Mapper {

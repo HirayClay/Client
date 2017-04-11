@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/page_border_padding"
+    android:paddingRight="@dimen/page_border_padding">
+
+    <TextView
+        android:id="@+id/fortune"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/forniture_bg"
+        android:drawableRight="@mipmap/icon_bean"
+        android:gravity="center"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="我有 95,225,714,122"
+        android:textColor="#fd9d57"
+        android:textSize="10sp" />
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/avatar"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/avatar_placeholder"
+        app:riv_corner_radius="16dp" />
+
+    <TextView
+        android:id="@+id/rank_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/fortune"
+        android:background="@mipmap/icon_rank"
+        android:gravity="center"
+        android:text="V"
+        android:textAllCaps="true"
+        android:textColor="#fff" />
+
+    <TextView
+        android:id="@+id/vip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="-2dp"
+        android:layout_toRightOf="@id/rank_icon"
+        android:background="@mipmap/v_bg"
+        android:gravity="center"
+        android:text="VIP1"
+        android:textColor="#fff" />
+
+    <TextView
+        android:id="@+id/clock_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/blue_oval_bg"
+        android:gravity="center"
+        android:text="签到"
+        android:textColor="#fff" />
+</RelativeLayout>

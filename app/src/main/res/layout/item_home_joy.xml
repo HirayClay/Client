@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/type_marker_shape"
+        android:drawablePadding="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="@dimen/page_border_padding"
+        android:paddingTop="10dp"
+        android:text="娱乐大厅" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/joy_hall"
+        android:layout_below="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/page_border_padding" />
+</RelativeLayout>

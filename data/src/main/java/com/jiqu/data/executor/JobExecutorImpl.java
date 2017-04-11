@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 
 public class JobExecutorImpl implements JobExecutor {
 
-    ThreadPoolExecutor threadPoolExecutor;
+    private ThreadPoolExecutor threadPoolExecutor;
 
     public JobExecutorImpl(int corePoolSize, int maximumPoolSize, int keepAliveTime, TimeUnit unit, LinkedBlockingQueue<Runnable> queue) {
         this.threadPoolExecutor = new ThreadPoolExecutor(corePoolSize,maximumPoolSize,keepAliveTime,unit,queue);
@@ -23,8 +23,6 @@ public class JobExecutorImpl implements JobExecutor {
 
     @Override
     public void execute(@NonNull Runnable command) {
-        if (command == null)
-            return;
         threadPoolExecutor.execute(command);
     }
 }

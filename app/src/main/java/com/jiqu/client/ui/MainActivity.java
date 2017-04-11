@@ -12,6 +12,7 @@ import com.jiqu.client.di.component.DaggerAccountComponent;
 import com.jiqu.client.di.module.AccountModule;
 import com.jiqu.client.mvp.presenter.TestPresenter;
 import com.jiqu.client.mvp.view.ServiceView;
+import com.jiqu.client.ui.account.LoginActivity;
 import com.jiqu.client.ui.adapter.SimpleTextAdapter;
 import com.jiqu.domain.entity.Service;
 
@@ -50,7 +51,7 @@ public class MainActivity extends BaseActivity implements ServiceView {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         DaggerAccountComponent.builder()
-                .applicationComponent(applicationComponent())
+                .applicationComponent(getApplicationComponent())
                 .accountModule(new AccountModule(this))
                 .build().inject(this);
         initRecyclerView();

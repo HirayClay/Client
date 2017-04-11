@@ -8,4 +8,18 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.Overlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <style name="TextInputEditText" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+
+        <!--<item name="colorAccent">#3498db</item>-->
+        <item name="android:textColorHint">#ccc</item>
+        <item name="colorControlNormal">#ccc</item>
+        <item name="colorControlActivated">@color/lightBlue</item>
+        <item name="colorControlHighlight">@color/lightBlue</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:textSize">15sp</item>
+    </style>
 </resources>

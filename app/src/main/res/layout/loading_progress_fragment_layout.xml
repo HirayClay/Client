@@ -11,7 +11,6 @@
     <com.jiqu.client.widget.MaterialCircleView
         app:bGradient="false"
         app:radius="50dp"
-        app:bg_transparent="false"
         app:circleColor="@color/colorPrimary"
         android:background="@android:color/white"
         android:layout_gravity="center"

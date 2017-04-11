@@ -1,0 +1,18 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.jiqu.client.ui.fragment.LoginFragment">
+
+    <android.support.design.widget.AppBarLayout
+        android:theme="@style/AppTheme.Overlay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.jiqu.client.widget.CenterTitleToolbar
+            android:title="登录"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"/>
+
+    </android.support.design.widget.AppBarLayout>
+
+</FrameLayout>

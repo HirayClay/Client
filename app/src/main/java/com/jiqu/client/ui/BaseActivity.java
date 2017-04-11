@@ -27,7 +27,7 @@ public class BaseActivity extends AppCompatActivity implements AuthLoadView {
     }
 
 
-    ApplicationComponent applicationComponent() {
+    protected ApplicationComponent getApplicationComponent() {
         return ((BaseApplication) getApplicationContext()).getApplicationComponent();
     }
 

@@ -2,7 +2,7 @@ package com.jiqu.client.di.component;
 
 import com.jiqu.client.di.ActivityScope;
 import com.jiqu.client.di.module.AccountModule;
-import com.jiqu.client.ui.LoginActivity;
+import com.jiqu.client.ui.account.LoginActivity;
 import com.jiqu.client.ui.MainActivity;
 
 import dagger.Component;

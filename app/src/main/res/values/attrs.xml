@@ -2,16 +2,31 @@
 <resources>
     <declare-styleable name="MaterialCircleView">
 
-        <attr name="bGradient" format="boolean"/>
-        <attr name="circleColor" format="color"/>
-        <attr name="circleWidth" format="dimension"/>
-        <attr name="radius" format="dimension"/>
+        <attr name="bGradient" format="boolean" />
+        <attr name="circleColor" format="color" />
+        <attr name="circleWidth" format="dimension" />
+        <attr name="radius" format="dimension" />
     </declare-styleable>
 
-    <declare-styleable name="UniversalLoadingView">
+    <!--ViewPager CircleIndicator-->
+    <declare-styleable name="CircleIndicator">
+        <attr name="number" format="integer" />
+        <attr name="color" format="color" />
+        <attr name="bubble_radius" format="dimension" />
+        <attr name="gap" format="dimension" />
+        <attr name="bubble_gravity" format="enum">
+            <enum name="left" value="0" />
+            <enum name="center" value="1" />
+            <enum name="right" value="2" />
+        </attr>
+        <attr name="mode" format="enum">
+            <enum name="background" value="0" />
+            <enum name="overlay" value="1" />
+        </attr>
+    </declare-styleable>
 
-        <attr name="bg_transparent" format="boolean"/>
-        <attr name="bg_alpha" format="integer"/>
-
+    <declare-styleable name="SpanTextView">
+        <attr name="spanClick" format="string" />
+        <attr name="spanColor" format="color" />
     </declare-styleable>
 </resources>
