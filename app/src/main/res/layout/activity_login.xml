@@ -44,7 +44,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="@dimen/page_start_spacing"
-        android:hint="请输入手机号码"
+        android:hint="请输入密码"
         cjj:theme="@style/TextInputEditText">
 
         <android.support.design.widget.TextInputEditText
@@ -84,7 +84,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/solid_blue_box_bg"
+        android:background="@drawable/solid_blue_bar_bg"
         android:gravity="center"
         android:text="立即登录"
         android:textColor="@color/white"

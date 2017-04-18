@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="330dp"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    android:paddingBottom="@dimen/padding_middle"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorGray"
+        android:padding="@dimen/padding_normal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="查询福利卡" />
+
+        <ImageView
+            android:id="@+id/close_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_close" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_marginTop="@dimen/margin_middle"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="查询卡号：" />
+
+        <EditText
+            android:id="@+id/query_edittext"
+            android:layout_width="120dp"
+            android:maxEms="17"
+            android:textSize="10sp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/gray_box_bg" />
+
+        <com.jiqu.client.widget.TextDrawable
+            android:id="@+id/confirm_query"
+            android:text="确认查询"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:layout_gravity="center_vertical"
+            android:layout_width="100dp"
+            android:layout_height="29dp"
+            android:layout_marginLeft="@dimen/margin_small"
+            app:background_color="#ff5a01"
+            app:corner="4dp" />
+    </LinearLayout>
+
+    <!--查询结果-->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_marginTop="@dimen/margin_middle"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="查询结果：" />
+
+        <TextView
+            android:id="@+id/query_result"
+            android:paddingLeft="@dimen/padding_small"
+            android:paddingTop="@dimen/padding_small"
+            tools:text="卡号不存在"
+            android:layout_width="230dp"
+            android:layout_height="100dp"
+            android:background="@drawable/gray_box_bg" />
+
+
+    </LinearLayout>
+
+</LinearLayout>

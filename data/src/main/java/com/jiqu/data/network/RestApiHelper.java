@@ -33,6 +33,7 @@ import rx.functions.Func1;
 @Singleton
 public class RestApiHelper {
     private static final String TAG = "RestApiHelper";
+    private static final String TOKEN_KEY = "KEY_TOKEN";
     RestApi restApi;
 
     Gson gson;
@@ -128,14 +129,15 @@ public class RestApiHelper {
     }
 
     //保存token  T类型视具体Token的返回所在对象的类型而定
-    public static final class TokenFunc<T> implements Func1<ResponseWrapper<T>, Observable<String>> {
+    public  final class TokenFunc<T> implements Func1<ResponseWrapper<T>, Observable<String>> {
 
         @Override
         public Observable<String> call(ResponseWrapper<T> responseWrapper) {
-            T body = responseWrapper.body;
+            final T body = responseWrapper.body;
             return Observable.create(new Observable.OnSubscribe<String>() {
                 @Override
                 public void call(Subscriber<? super String> subscriber) {
+                    sharedPreferences.edit().putString(TOKEN_KEY, (String) body).apply();
                     subscriber.onNext("");
                 }
             });

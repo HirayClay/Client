@@ -31,13 +31,11 @@ public class ExpanedGridlayoutManager extends GridLayoutManager {
     public void onMeasure(RecyclerView.Recycler recycler, RecyclerView.State state, int widthSpec, int heightSpec) {
         int height;
         int childCount = getItemCount();
-        int lines = (childCount + 1) / getSpanCount();
-        Log.i(TAG, "onMeasure: " + lines);
+        int lines = (childCount) / getSpanCount() + (childCount % getSpanCount() == 0 ? 0 : 1);
 
         View child = recycler.getViewForPosition(1);
         measureChild(child, widthSpec, heightSpec);
         height = child.getMeasuredHeight() * lines;
-        Log.i(TAG, "onMeasure: " + child.getMeasuredHeight());
         setMeasuredDimension(MeasureSpec.getSize(widthSpec), height);
     }
 }

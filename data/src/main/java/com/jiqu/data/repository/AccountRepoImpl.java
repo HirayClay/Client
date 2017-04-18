@@ -31,7 +31,7 @@ public class AccountRepoImpl implements AccountRepo {
     @Override
     public Observable<String> login(LoginParam param) {
         return restApiHelper.restApi()
-                .login(param).flatMap(new RestApiHelper.TokenFunc<String>());
+                .login(param).flatMap(new RestApiHelper.LocalFunc<String>());
     }
 
     @Override

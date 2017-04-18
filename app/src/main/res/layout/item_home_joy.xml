@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/page_border_padding"
+    android:paddingRight="@dimen/page_border_padding"
     android:orientation="vertical">
 
     <TextView
@@ -15,10 +17,15 @@
         android:paddingTop="10dp"
         android:text="娱乐大厅" />
 
+
+    <View
+        android:background="@color/colorDivider"
+        android:layout_width="match_parent"
+        android:layout_height="2px"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/joy_hall"
-        android:layout_below="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/page_border_padding" />
-</RelativeLayout>
+        android:paddingLeft="@dimen/page_border_padding" />
+</LinearLayout>

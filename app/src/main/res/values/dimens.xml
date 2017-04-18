@@ -3,8 +3,12 @@
     <dimen name="radiobutton_drawable_text_space">3dp</dimen>
 
     <dimen name="page_border_padding">9dp</dimen>
-    <dimen name="padding_small">6dp</dimen>
     <dimen name="page_start_spacing">18dp</dimen>
+
+    <dimen name="padding_small">6dp</dimen>
+    <dimen name="padding_normal">10dp</dimen>
+    <dimen name="padding_middle">16dp</dimen>
     <dimen name="margin_small">6dp</dimen>
+    <dimen name="margin_middle">16dp</dimen>
 
 </resources>

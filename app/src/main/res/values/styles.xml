@@ -5,10 +5,23 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <!--<item name="colorAccent">@color/appPrimary</item>-->
+        <!--<item name="android:textColor">@color/appTextPrimary</item>-->
+
+        <!--标题属性设置-->
+        <item name="navigationIcon">@mipmap/icon_nav_back</item>
+        <item name="titleTextColor">@android:color/white</item>
+        <!--Menu属性设置-->
+        <item name="android:actionMenuTextAppearance">@style/ToolBarTextAppearance</item>
     </style>
 
-    <style name="AppTheme.Overlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="ToolBarTextAppearance">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">17sp</item>
+        <!--<item name="android:actionMenuTextColor">@color/newAppPrimary</item>-->
+    </style>
+
+    <style name="AppTheme.Overlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="TextInputEditText" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -21,5 +34,12 @@
         <item name="colorControlHighlight">@color/lightBlue</item>
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="ItemRootLayoutPaddingStyle">
+        <item name="android:paddingLeft">@dimen/page_border_padding</item>
+        <item name="android:paddingRight">@dimen/page_border_padding</item>
+        <item name="android:paddingTop">@dimen/padding_normal</item>
+        <item name="android:paddingBottom">@dimen/padding_normal</item>
     </style>
 </resources>

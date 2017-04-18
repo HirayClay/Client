@@ -1,6 +1,7 @@
 package com.jiqu.client.mvp.presenter;
 
 import rx.Observable;
+import rx.Subscriber;
 
 /**
  * Created by CJJ on 2017/3/10.

@@ -29,4 +29,19 @@
         <attr name="spanClick" format="string" />
         <attr name="spanColor" format="color" />
     </declare-styleable>
+
+    <!--TextDrawable-->
+    <declare-styleable name="TextDrawable">
+        <attr name="background_color" format="color" />
+        <attr name="corner" format="dimension" />
+        <attr name="radius_left_top" format="dimension" />
+        <attr name="radius_left_bottom" format="dimension" />
+        <attr name="radius_right_top" format="dimension" />
+        <attr name="radius_right_bottom" format="dimension" />
+    </declare-styleable>
+
+    <!--ScalableHintEditText-->
+    <declare-styleable name="ScalableHintEditText">
+        <attr name="hintTextSize" format="dimension"/>
+    </declare-styleable>
 </resources>

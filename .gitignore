@@ -13,6 +13,16 @@
 .idea/
 package.json
 .externalNativeBuild
-data/src/main/java/com/jiqu/data/repository/datasource/
+app/src/main/res/layout
+data/src/main/java/com/jiqu/data/
 common/libs/
 common/src/main/res/drawable/
+app/src/main/java/com/jiqu/client/mvp
+app/src/main/java/com/jiqu/client/di
+app/src/main/java/com/jiqu/client/ui/adapter
+app/src/main/java/com/jiqu/client/ui/exchange
+app/src/main/java/com/jiqu/client/ui/market
+app/src/main/java/com/jiqu/client/ui/account
+common/src/test/java/com/processor/common/ExampleUnitTest.java~HEAD
+common/src/test/java/com/processor/common/ExampleUnitTest.java~origin_master
+processor/libs/

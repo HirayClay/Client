@@ -35,24 +35,28 @@
         </activity>
         <activity android:name=".ui.SplashActivity" />
         <activity android:name=".ui.home.HomeActivity">
+              <intent-filter>
+                  <action android:name="android.intent.action.MAIN" />
 
-            <!--
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            -->
+                  <category android:name="android.intent.category.LAUNCHER" />
+              </intent-filter>
         </activity>
         <activity android:name=".ui.market.MarketActivity" />
         <activity android:name=".ui.account.RegisterActivity">
-            <intent-filter>
+            <!-- <intent-filter>
+                 <action android:name="android.intent.action.MAIN" />
+
+                 <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>-->
+        </activity>
+        <activity android:name=".ui.account.ConfirmAddressInfoActivity" />
+        <activity android:name=".ui.exchange.BonusCardExchangeActivity">
+         <!--   <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>-->
         </activity>
-        <activity android:name=".ui.account.ConfirmAddressInfoActivity"></activity>
     </application>
 
 </manifest>

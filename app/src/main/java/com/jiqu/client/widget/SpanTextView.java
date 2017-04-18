@@ -26,12 +26,12 @@ import java.lang.reflect.Method;
  * @attr spanColor
  * <p>
  * <SpanTextView
- * android:onClick="clickBoy"
+ * android:spanClick="clickBoy"
  * app:text="i am a {boy}"
  * app:spanColor="@color/red"/>
  * <p>
  * the string “boy” will appear in red,and when "body" is click ,clickBoy(View view) will be invoked
- * that's how this widget work
+ * that's how this widget works
  */
 public class SpanTextView extends TextView {
     Method spanClickMethod;

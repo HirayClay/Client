@@ -8,8 +8,22 @@
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
 
-    <color name="colorDivider">#f6f6f6</color>
-    <color name="textColorLight">#999999</color>
+    <color name="colorDivider">#eeeeee</color>
     <color name="colorOrange">#ff6600</color>
     <color name="lightBlue">#53bbfb</color>
+    <color name="lightYellow">#ffc52a</color>
+    <color name="colorBrown">#ba7d0e</color>
+
+
+    <!--Background Color-->
+    <color name="colorBackgroundLight">#f6f6f6</color>
+
+    <!--Text Color-->
+    <color name="textColorLight">#999999</color>
+    <color name="textColor">#8c8c8c</color>
+    <color name="colorTextHint">#d9d9d9</color>
+    <color name="red">#ff0000</color>
+    <color name="redLight">#f88989</color>
+    <color name="colorGray">#f6f6f6</color>
+
 </resources>

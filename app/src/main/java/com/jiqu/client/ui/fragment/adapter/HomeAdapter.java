@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
@@ -18,7 +17,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.jiqu.client.R;
 import com.jiqu.client.widget.CircleIndicator;
-import com.jiqu.client.widget.ExpanedGridlayoutManager;
+import com.jiqu.client.widget.GridItemDecoration;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
@@ -28,12 +27,13 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+
 /**
  * @author: CJJ
  * @date 2017/4/6
  */
 public class HomeAdapter extends RecyclerView.Adapter {
-
+    private static final String TAG = "HomeAdapter";
     public static final int BANNER = 0;//轮播
     public static final int PERSON = 1;//用户信息
     public static final int HOT = 2;//热门
@@ -96,12 +96,20 @@ public class HomeAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
+
+        if (holder instanceof BannerViewHolder) {
+            BannerViewHolder bannerViewHolder = (BannerViewHolder) holder;
+            bannerViewHolder.circleIndicator.setViewPager(bannerViewHolder.viewPager);
+            bannerViewHolder.circleIndicator.setNumber(4);
+        }
+
         if (holder instanceof JoyViewHolder) {
             JoyViewHolder joyViewHolder = (JoyViewHolder) holder;
             if (joyViewHolder.recyclerView.getLayoutManager() != null)
                 return;
             RecyclerView recyclerView = joyViewHolder.recyclerView;
-            recyclerView.setLayoutManager(new ExpanedGridlayoutManager(context, 2, LinearLayoutManager.VERTICAL, false));
+            recyclerView.setLayoutManager(new GridLayoutManager(context, 2));
+            recyclerView.addItemDecoration(new GridItemDecoration(context));
             recyclerView.setAdapter(new GridAdapter());
         }
     }
@@ -134,7 +142,6 @@ public class HomeAdapter extends RecyclerView.Adapter {
                 Glide.with(context).load(bannerUrls.get(i)).into(iv);
             }
             viewPager.setAdapter(new BannerAdapter(views));
-            circleIndicator.setViewPager(viewPager);
         }
     }
 
@@ -204,7 +211,8 @@ public class HomeAdapter extends RecyclerView.Adapter {
             if (layoutInflater == null)
                 layoutInflater = LayoutInflater.from(parent.getContext());
             View view = layoutInflater.inflate(R.layout.sub_item_joy, parent, false);
-            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(dm.widthPixels / 2, dp2px(76));
+            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(dm.widthPixels / 2, RelativeLayout
+                    .LayoutParams.WRAP_CONTENT);
             view.setLayoutParams(lp);
             return new JoyHolder(view);
         }

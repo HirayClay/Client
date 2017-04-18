@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@mipmap/ic_mine_background"
+    android:gravity="center_vertical"
+    android:paddingTop="30dp"
+    android:paddingBottom="30dp"
+    android:paddingLeft="@dimen/page_border_padding"
+    android:paddingRight="@dimen/page_border_padding">
+
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/avatar"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_gravity="center"
+            app:riv_corner_radius="36dp"
+            android:src="@mipmap/avatar_placeholder" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="72dp"
+        android:layout_weight="2">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/user_name"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="酸奶" />
+
+            <TextView
+                android:id="@+id/id_text"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/user_name"
+                android:text="ID: " />
+
+            <TextView
+                android:id="@+id/user_id"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/user_name"
+                android:layout_toRightOf="@+id/id_text"
+                tools:text="30054" />
+
+            <TextView
+                android:id="@+id/text_bean"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/id_text"
+                android:text="我的趣豆:" />
+
+            <TextView
+                android:id="@+id/bean_number"
+                android:layout_width="wrap_content"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/id_text"
+                android:layout_toRightOf="@id/text_bean"
+                android:drawablePadding="@dimen/padding_small"
+                android:drawableRight="@mipmap/icon_bean"
+                tools:text="100000" />
+        </RelativeLayout>
+    </FrameLayout>
+
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_gravity="right"
+            android:layout_marginTop="@dimen/padding_small"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="[退出]" />
+    </FrameLayout>
+
+</LinearLayout>

@@ -99,7 +99,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/solid_blue_box_bg"
+        android:background="@drawable/solid_blue_bar_bg"
         android:gravity="center"
         android:text="注册"
         android:textColor="@color/white"

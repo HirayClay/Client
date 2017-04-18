@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackgroundLight"
+    android:orientation="vertical"
+    tools:context="com.jiqu.client.ui.exchange.BonusCardExchangeActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.Overlay">
+
+        <com.jiqu.client.widget.CenterTitleToolbar
+            android:layout_width="match_parent"
+            android:layout_height="?android:actionBarSize"
+            app:title="福利卡兑换" />
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/ic_mine_background"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="30dp"
+        android:paddingLeft="@dimen/page_border_padding"
+        android:paddingRight="@dimen/page_border_padding"
+        android:paddingTop="30dp">
+
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_gravity="center"
+                android:src="@mipmap/avatar_placeholder"
+                app:riv_corner_radius="36dp" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="72dp"
+            android:layout_weight="2">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    tools:text="酸奶" />
+
+                <TextView
+                    android:id="@+id/id_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/user_name"
+                    android:text="      (ID: 30054)"
+                    android:textColor="@color/white" />
+
+
+                <TextView
+                    android:id="@+id/text_bean"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/id_text"
+                    android:text="我的趣豆:"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/id_text"
+                    android:layout_toRightOf="@id/text_bean"
+                    android:drawablePadding="@dimen/padding_small"
+                    android:drawableRight="@mipmap/icon_bean"
+                    android:textColor="@color/white"
+                    tools:text="100000" />
+            </RelativeLayout>
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginTop="@dimen/padding_small"
+                android:text="[退出]"
+                android:textColor="@color/white" />
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/page_start_spacing"
+        android:paddingLeft="@dimen/page_border_padding"
+        android:paddingRight="@dimen/page_border_padding">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/page_start_spacing"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="100dp"
+                android:layout_height="wrap_content">
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_weight="1"
+                    android:button="@drawable/button_check_selector"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/padding_small"
+                    android:text="给自己充值:"
+                    android:textColor="@color/textColor" />
+            </FrameLayout>
+
+
+            <TextView
+                android:id="@+id/self_name_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/margin_small"
+                android:text="酸奶（ID:30054）"
+                android:textColor="@color/textColorLight" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_middle"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="100dp"
+                android:layout_height="wrap_content">
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:button="@drawable/button_check_selector"
+                    android:paddingLeft="@dimen/padding_small"
+                    android:text="为好友充值:"
+                    android:textColor="@color/textColor" />
+            </FrameLayout>
+
+            <EditText
+                android:id="@+id/friend_id"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_small"
+                android:background="@drawable/gray_box_bg"
+                android:gravity="center_vertical|left"
+                android:hint="好友ID"
+                android:paddingLeft="@dimen/padding_normal"
+                android:textColorHint="@color/colorTextHint" />
+        </LinearLayout>
+
+        <!--福利卡卡号-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_middle"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="100dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:text="福利卡卡号:"
+                    android:textColor="@color/textColor" />
+            </FrameLayout>
+
+            <EditText
+                android:id="@+id/card_code"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_small"
+                android:background="@drawable/gray_box_bg"
+                android:gravity="center_vertical|left"
+                android:paddingLeft="@dimen/padding_normal"
+                android:inputType="numberDecimal"
+                android:textColorHint="@color/colorTextHint" />
+
+            <TextView
+                android:id="@+id/check_code"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/padding_normal"
+                android:text="验证卡号"
+                android:textColor="@color/redLight" />
+        </LinearLayout>
+
+        <!--福利卡卡密-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_middle"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="100dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:text="福利卡卡密:"
+                    android:textColor="@color/textColor" />
+            </FrameLayout>
+
+            <EditText
+                android:id="@+id/card_pwd"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_small"
+                android:background="@drawable/gray_box_bg"
+                android:gravity="center_vertical|left"
+                android:paddingLeft="@dimen/padding_normal"
+                android:textColorHint="@color/colorTextHint" />
+        </LinearLayout>
+
+
+        <!--交易密码-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_middle"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="100dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:text="交易密码:"
+                    android:textColor="@color/textColor" />
+            </FrameLayout>
+
+            <EditText
+                android:id="@+id/trade_pwd"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_small"
+                android:background="@drawable/gray_box_bg"
+                android:gravity="center_vertical|left"
+                android:paddingLeft="@dimen/padding_normal"
+                android:textColorHint="@color/colorTextHint" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/page_start_spacing"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="125dp"
+                    android:layout_height="29dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/solid_blue_box_bg"
+                    android:gravity="center"
+                    android:text="提交"
+                    android:textColor="@color/white" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="125dp"
+                    android:layout_height="29dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/gray_box_bg"
+                    android:gravity="center"
+                    android:text="转换卡密"
+                    android:textColor="@color/textColor" />
+            </FrameLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

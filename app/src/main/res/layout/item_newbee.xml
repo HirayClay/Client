@@ -14,10 +14,17 @@
         android:paddingTop="10dp"
         android:text="新手游戏场" />
 
+    <View
+        android:background="@color/colorDivider"
+        android:layout_width="match_parent"
+        android:layout_height="2px"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:paddingTop="@dimen/padding_middle"
+        android:paddingBottom="@dimen/padding_middle"
         android:padding="@dimen/page_border_padding">
 
         <ImageView

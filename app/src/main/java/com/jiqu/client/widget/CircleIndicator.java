@@ -23,7 +23,6 @@ import static android.graphics.PorterDuff.Mode.SRC_IN;
  * @date 2017/4/6
  */
 public class CircleIndicator extends View {
-
     private static final String TAG = "CircleIndicator";
     PorterDuffXfermode SRC_INXfermode;
     int defaultColor = Color.parseColor("#000000");
@@ -52,7 +51,7 @@ public class CircleIndicator extends View {
 
     public CircleIndicator(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        @SuppressLint("Recycle") TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.CircleIndicator);
+        TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.CircleIndicator);
         color = array.getColor(R.styleable.CircleIndicator_color, defaultColor);
         radius = array.getDimensionPixelSize(R.styleable.CircleIndicator_bubble_radius, 0);
         number = array.getInteger(R.styleable.CircleIndicator_number, 0);
@@ -64,12 +63,6 @@ public class CircleIndicator extends View {
         paint.setStyle(Paint.Style.FILL_AND_STROKE);
         SRC_INXfermode = new PorterDuffXfermode(SRC_IN);
         paint.setAntiAlias(true);
-    }
-
-
-    public void setNumber(int number) {
-        this.number = number;
-        invalidate();
     }
 
     public void setViewPager(ViewPager v) {
@@ -93,6 +86,11 @@ public class CircleIndicator extends View {
             public void onPageScrollStateChanged(int state) {
             }
         });
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+        invalidate();
     }
 
     public CircleIndicator(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
@@ -122,7 +120,7 @@ public class CircleIndicator extends View {
                 centerX = radius;
                 break;
             case CENTER:
-                centerX = getMeasuredWidth() / 2 - (2 * radius * number + gap * (number - 1)) / 2;
+                centerX = getMeasuredWidth() / 2 - (2 * radius * number + gap * (number - 1)) / 2+radius;
                 break;
             case RIGHT:
                 centerX = radius + (getMeasuredWidth() - (2 * radius * number + gap * (number - 1)));
@@ -135,7 +133,7 @@ public class CircleIndicator extends View {
         int id = 0;
         if (bubbleMode == MODE_BACKGROUND)
             id = canvas.save(Canvas.ALL_SAVE_FLAG);
-        paint.setColor(Color.YELLOW);
+        paint.setColor(color);
         for (int i = 0; i < number; i++) {
             canvas.drawCircle(centerX, centerY, radius, paint);
             centerX += (2 * radius + gap);
