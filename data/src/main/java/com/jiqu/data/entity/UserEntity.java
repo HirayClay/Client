@@ -8,9 +8,7 @@ import io.realm.RealmObject;
  * 返回类类型数据，所以data层实体类
  *
  */
-
 public class UserEntity extends RealmObject {
-
     private String userId;
     private String userName;
     private String gender;

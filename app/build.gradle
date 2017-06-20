@@ -35,6 +35,19 @@ android {
             keyAlias "jiquKey"
         }
     }
+
+/*    splits {
+        // Split apks on build target ABI, view all options for the splits here:
+        // http://tools.android.com/tech-docs/new-build-system/user-guide/apk-splits
+        abi {
+            enable true
+            reset()
+            include 'armeabi', 'armeabi-v7a', 'arm64-v8a', 'mips', 'x86', 'x86_64'
+        }
+    }*/
+    packagingOptions {
+        exclude "lib/arm64-v8a/librealm-jni.so"
+    }
 }
 
 dependencies {
@@ -59,7 +72,6 @@ dependencies {
     compile 'com.flipboard:bottomsheet-commons:1.5.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.1'
     //apt
-    compile project(':processor')
     apt project(':processor')
     testCompile 'junit:junit:4.12'
 }

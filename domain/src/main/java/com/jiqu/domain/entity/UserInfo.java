@@ -1,9 +1,11 @@
 package com.jiqu.domain.entity;
 
+import com.processor.Mapper;
+
 /**
  * Created by CJJ on 2017/3/13.
  */
-
+@Mapper
 public class UserInfo {
 
     String userName;

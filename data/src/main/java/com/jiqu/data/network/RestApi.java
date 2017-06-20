@@ -6,7 +6,6 @@ import com.jiqu.domain.param.LoginParam;
 
 import java.util.List;
 
-import io.realm.RealmList;
 import retrofit.http.Body;
 import retrofit.http.POST;
 import rx.Observable;

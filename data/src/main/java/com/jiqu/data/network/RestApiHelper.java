@@ -1,10 +1,7 @@
 package com.jiqu.data.network;
 
-import android.util.Log;
-
 import com.google.gson.Gson;
 import com.jiqu.data.network.dataformat.ResponseWrapper;
-import com.jiqu.data.real.RealHelper;
 import com.jiqu.domain.exception.AuthException;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.MediaType;
@@ -101,7 +98,6 @@ public class RestApiHelper {
                                 realm.executeTransaction(new Realm.Transaction() {
                                     @Override
                                     public void execute(Realm realm) {
-                                        Log.i(TAG, "execute: thread:"+Thread.currentThread());
                                         if (tResponseWrapper.body instanceof RealmObject)
                                             realm.copyToRealmOrUpdate((RealmObject) tResponseWrapper.body);
                                         else

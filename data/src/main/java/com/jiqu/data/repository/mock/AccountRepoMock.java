@@ -35,6 +35,7 @@ public class AccountRepoMock implements AccountRepo {
     @Inject
     ServiceMapper serviceMapper;
 
+
     @Inject
     public AccountRepoMock() {
     }
@@ -84,7 +85,6 @@ public class AccountRepoMock implements AccountRepo {
             }
         });
 
-//       return restApiHelper.restApi().getServices().flatMap(new RestApiHelper.LocalFunc<List<Service>>());
     }
 
 
